@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Главная страница{% endblock %}
+
+{% block content %}
+<h1>Добро пожаловать в магазин столовых приборов!</h1>
+
+{% if 'username' in session %}
+    <p>Вы вошли как {{ session['username'] }}</p>
+
+    <a href="{{ url_for('products') }}">
+        <button>Просмотр товаров</button>
+    </a>
+
+    <a href="{{ url_for('my_orders') }}">
+        <button>Мои заказы</button>
+    </a>
+{% else %}
+    <a href="{{ url_for('login') }}">
+        <button>Войти</button>
+    </a>
+
+    <a href="{{ url_for('register') }}">
+        <button>Регистрация</button>
+    </a>
+{% endif %}
+
+{% if 'username' in session and session['username'] == 'admin' %}
+    <a href="{{ url_for('add_product') }}">
+        <button>Добавить товар</button>
+    </a>
+
+    <a href="{{ url_for('manage_orders') }}">
+        <button>Управление заказами</button>
+    </a>
+{% endif %}
+{% endblock %}

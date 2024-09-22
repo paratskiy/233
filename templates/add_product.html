@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Добавить товар{% endblock %}
+
+{% block content %}
+<h1>Добавить новый товар</h1>
+
+<form action="{{ url_for('add_product') }}" method="POST">
+    <label for="name">Название:</label><br>
+    <input type="text" id="name" name="name" required><br>
+
+    <label for="price">Цена:</label><br>
+    <input type="number" id="price" name="price" required><br>
+
+    <label for="description">Описание:</label><br>
+    <textarea id="description" name="description" required></textarea><br>
+
+    <label for="image_url">Ссылка на изображение:</label><br>
+    <input type="text" id="image_url" name="image_url"><br><br>
+
+    <button type="submit">Добавить товар</button>
+</form>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Каталог{% endblock %}
+
+{% block content %}
+<h1>Каталог товаров</h1>
+
+{% if products %}
+    <ul>
+        {% for product in products %}
+        <li style="display: flex; align-items: center; margin-bottom: 10px;">
+            <img src="{{ product['image_url'] }}" alt="Изображение товара" style="max-width: 100px; margin-right: 20px;">
+            <div>
+                <h3>{{ product['name'] }}</h3>
+                <p>{{ product['description'] }}</p>
+                <p>Цена: {{ product['price'] }} руб.</p>
+                <form action="{{ url_for('order', product_id=product['id']) }}" method="POST">
+                    <label for="quantity">Количество:</label>
+                    <input type="number" name="quantity" min="1" value="1" required>
+                    <button type="submit">Заказать</button>
+                </form>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>Нет доступных товаров.</p>
+{% endif %}
+{% endblock %}

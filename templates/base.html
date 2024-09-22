@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Магазин столовых приборов{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="navbar-left">
+                <span>Привет, {% if 'username' in session %}{{ session['username'] }}{% else %}Гость{% endif %}</span>
+            </div>
+            <div class="navbar-right">
+                <a href="{{ url_for('index') }}" class="btn btn-primary">Главная страница</a>
+                {% if 'username' in session %}
+                    <a href="{{ url_for('logout') }}" class="btn btn-secondary">Выход</a>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+
+    <div class="container mt-4">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
